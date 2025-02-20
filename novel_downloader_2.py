@@ -5,6 +5,7 @@ import traceback
 import time
 from request_chatper_url import RequestChapterURL
 from chapter_downloader import ChapterDownloader
+from async_downloader import AsyncChapterDownloader
 
 # 配置日志系统
 logging.basicConfig(
@@ -28,7 +29,6 @@ class NovelDownloader:
         self.retry_delay = 1  # 重试等待时间（秒）
 
     def download_chapters(self):
-        """增强错误处理的章节下载方法"""
         try:
             requester = RequestChapterURL(self.baseurl, self.url_path, self.selector_chapter)
             chapters = requester.get_chapter_links_and_titles()
@@ -37,52 +37,14 @@ class NovelDownloader:
                 logging.error("未获取到任何章节链接！请检查选择器或网络连接")
                 return
 
-            chapter_contents = {}
-            failed_chapters = []
-
-            for idx, chapter in enumerate(chapters, 1):
-                chapter_url = chapter['url']
-                chapter_title = chapter['title']
-                logging.info(f"正在下载 ({idx}/{len(chapters)}) {chapter_title}")
-
-                for attempt in range(self.max_retries):
-                    try:
-                        downloader = ChapterDownloader(chapter_url, self.selector_content)
-                        content = downloader.get_chapter_content()
-
-                        if not content.strip():
-                            raise ValueError("获取到空内容")
-
-                        chapter_contents[chapter_title] = content
-                        break  # 成功则退出重试循环
-                    except requests.exceptions.RequestException as e:
-                        if e.response and e.response.status_code == 403:
-                            logging.error(f"访问被禁止 (403 Forbidden): {chapter_title}")
-                            break  # 403 Forbidden 无需重试
-                        logging.warning(f"第{attempt + 1}次尝试失败 ({chapter_title}): 网络错误 - {str(e)}")
-                    except (AttributeError, KeyError) as e:
-                        logging.error(f"内容解析失败 ({chapter_title}): 选择器可能失效 - {str(e)}")
-                        break  # 解析错误无需重试
-                    except Exception as e:
-                        logging.warning(f"第{attempt + 1}次尝试失败 ({chapter_title}): {str(e)}")
-
-                    if attempt < self.max_retries - 1:
-                        time.sleep(self.retry_delay)
-                else:  # 所有重试均失败
-                    failed_chapters.append(chapter_title)
-                    logging.error(f"章节下载失败: {chapter_title}")
-                    continue
-
-                logging.info(f"成功下载: {chapter_title}")
-
-            if failed_chapters:
-                logging.error(f"以下章节未能成功下载:\n" + "\n".join(failed_chapters))
+            async_downloader = AsyncChapterDownloader(max_workers=5, max_retries=self.max_retries,
+                                                      retry_delay=self.retry_delay)
+            chapter_contents, failed_chapters = async_downloader.download_chapters(chapters, self.selector_content)
 
             self.save_to_file(chapter_contents)
             return len(failed_chapters)
-
         except Exception as e:
-            logging.critical(f"致命错误: {str(e)}\n{traceback.format_exc()}")
+            logging.critical(f"致命错误: {str(e)}")
             return -1
 
     def save_to_file(self, chapter_contents):
