@@ -37,7 +37,7 @@ class NovelDownloader:
                 logging.error("未获取到任何章节链接！请检查选择器或网络连接")
                 return
 
-            async_downloader = AsyncChapterDownloader(max_workers=5, max_retries=self.max_retries,
+            async_downloader = AsyncChapterDownloader(max_workers=10, max_retries=self.max_retries,
                                                       retry_delay=self.retry_delay)
             chapter_contents, failed_chapters = async_downloader.download_chapters(chapters, self.selector_content)
 
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     downloader = NovelDownloader(
         baseurl="https://m.bqug8.com/",
         url_path='kan/131238/list.html',
-        output_file='chapters_content.txt',
+        output_file='output/novel_unfinished.txt',
         selector_content='#chaptercontent',  # 内容选择器
         selector_chapter='.listmain a'  # 章节选择器
     )
