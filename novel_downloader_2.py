@@ -24,8 +24,8 @@ class NovelDownloader:
         self.output_file = output_file
         self.selector_content = selector_content
         self.selector_chapter = selector_chapter  # 修正拼写错误
-        self.max_retries = 3  # 最大重试次数
-        self.retry_delay = 5  # 重试等待时间（秒）
+        self.max_retries = 1  # 最大重试次数
+        self.retry_delay = 1  # 重试等待时间（秒）
 
     def download_chapters(self):
         """增强错误处理的章节下载方法"""
@@ -56,6 +56,9 @@ class NovelDownloader:
                         chapter_contents[chapter_title] = content
                         break  # 成功则退出重试循环
                     except requests.exceptions.RequestException as e:
+                        if e.response and e.response.status_code == 403:
+                            logging.error(f"访问被禁止 (403 Forbidden): {chapter_title}")
+                            break  # 403 Forbidden 无需重试
                         logging.warning(f"第{attempt + 1}次尝试失败 ({chapter_title}): 网络错误 - {str(e)}")
                     except (AttributeError, KeyError) as e:
                         logging.error(f"内容解析失败 ({chapter_title}): 选择器可能失效 - {str(e)}")
@@ -101,7 +104,7 @@ if __name__ == '__main__':
     # 参数修正：selector_content 和 selector_chapter 的顺序
     downloader = NovelDownloader(
         baseurl="https://m.bqug8.com/",
-        url_path='kan/37264/list.html',
+        url_path='kan/131238/list.html',
         output_file='chapters_content.txt',
         selector_content='#chaptercontent',  # 内容选择器
         selector_chapter='.listmain a'  # 章节选择器

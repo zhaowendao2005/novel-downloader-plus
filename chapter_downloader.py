@@ -22,8 +22,8 @@ class ChapterDownloader:
         html = self.request_html()
         soup = BeautifulSoup(html, 'html.parser')
         title_contents= []
-        for chapter_conents in soup.select(selector):
-            title_contents.append(chapter_conents.get_text())
+        for chapter_contents in soup.select(self.selector):
+            title_contents.append(chapter_contents.get_text())
         #for i in chapter_conents:
          #   print(i)
         #chapter_conents转化为字符串

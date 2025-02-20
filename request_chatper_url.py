@@ -1,15 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
+import logging
 class RequestChapterURL:
-    user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
-    headers = {'User-Agent': user_agent}
-
-    def __init__(self, baseurl,url_path,chatper_selector):
-
-        self.baseurl=baseurl
-        self.url = baseurl + url_path
-        self.url_Path=url_path
-        self.selector_chatper = chatper_selector
+    def __init__(self, baseurl, url_path, selector_chapter):
+        self.baseurl = baseurl
+        self.url_path = url_path
+        self.selector_chapter = selector_chapter
 
 
     def request_html(self):
@@ -20,14 +16,24 @@ class RequestChapterURL:
             response.raise_for_status()
 
     def get_chapter_links_and_titles(self):
-        html = self.request_html()
-        soup = BeautifulSoup(html, 'html.parser')
+        try:
+            response = requests.get(self.baseurl + self.url_path)
+            response.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
+        except requests.exceptions.HTTPError as http_err:
+            if response.status_code == 403:
+                logging.error("访问被禁止 (403 Forbidden): 请检查是否被网站屏蔽")
+            else:
+                logging.error(f"HTTP错误: {http_err}")
+            return []
+        except requests.exceptions.RequestException as req_err:
+            logging.error(f"请求错误: {req_err}")
+            return []
+        soup = BeautifulSoup(response.content, 'html.parser')
         chapters = []
-        for link in soup.select(self.selector_chatper):
-            title = link.get_text()
+        for link in soup.select(self.selector_chapter):
+            title = link.get_text(strip=True)
             href = link.get('href')
-            if href and title:
-                chapters.append({'title': title, 'url':baseurl.rstrip('/')+href})
+            chapters.append({'title': title, 'url': self.baseurl.rstrip('/') + href})
         return chapters
 if __name__ == '__main__':# 使用示例
     baseurl = "https://m.bqug8.com/"
