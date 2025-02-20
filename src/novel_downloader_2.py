@@ -72,7 +72,7 @@ if __name__ == '__main__':
         output_file='output/novel_unfinished.txt',
         selector_content='#chaptercontent',  # 内容选择器
         selector_chapter='.listmain a', # 章节选择器
-        max_workers=10
+        max_workers=4
     )
 
     result = downloader.download_chapters()
