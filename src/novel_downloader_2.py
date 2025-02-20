@@ -12,21 +12,23 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(message)s',
     handlers=[
-        logging.FileHandler('novel_downloader.log'),
+        logging.FileHandler('../novel_downloader.log'),
         logging.StreamHandler()
     ]
 )
 
 
 class NovelDownloader:
-    def __init__(self, baseurl, url_path, output_file, selector_content, selector_chapter):
+    def __init__(self, baseurl, url_path, output_file, selector_content, selector_chapter,max_workers=8):
         self.baseurl = baseurl
+        #默认线程数为8
         self.url_path = url_path
         self.output_file = output_file
         self.selector_content = selector_content
         self.selector_chapter = selector_chapter  # 修正拼写错误
         self.max_retries = 1  # 最大重试次数
         self.retry_delay = 1  # 重试等待时间（秒）
+        self.max_workers = max_workers
 
     def download_chapters(self):
         try:
@@ -37,7 +39,7 @@ class NovelDownloader:
                 logging.error("未获取到任何章节链接！请检查选择器或网络连接")
                 return
 
-            async_downloader = AsyncChapterDownloader(max_workers=10, max_retries=self.max_retries,
+            async_downloader = AsyncChapterDownloader(max_workers=self.max_workers, max_retries=self.max_retries,
                                                       retry_delay=self.retry_delay)
             chapter_contents, failed_chapters = async_downloader.download_chapters(chapters, self.selector_content)
 
@@ -69,7 +71,8 @@ if __name__ == '__main__':
         url_path='kan/131238/list.html',
         output_file='output/novel_unfinished.txt',
         selector_content='#chaptercontent',  # 内容选择器
-        selector_chapter='.listmain a'  # 章节选择器
+        selector_chapter='.listmain a', # 章节选择器
+        max_workers=10
     )
 
     result = downloader.download_chapters()
