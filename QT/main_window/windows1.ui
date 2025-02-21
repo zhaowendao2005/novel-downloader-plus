@@ -47,8 +47,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>115</width>
-         <height>304</height>
+         <width>108</width>
+         <height>30</height>
         </rect>
        </property>
        <attribute name="label">
@@ -69,8 +69,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>115</width>
-         <height>304</height>
+         <width>108</width>
+         <height>30</height>
         </rect>
        </property>
        <attribute name="label">
@@ -107,33 +107,20 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_11">
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="PushButton" name="pushButton_downloader">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
               <property name="styleSheet">
                <string notr="true">QPushButton {
-    background-color: #2a70f4; /* 默认背景色 */
-    color: white; 
-    font-size: 13px;
-    border-radius: 10px; /* 设置所有角的圆角 */
-    border: none; /* 去掉边框 */
-    padding: 5px; /* 内边距 */
-    /* 渐变背景 */
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2a70f4, stop:1 #1a4db7);
-}
-
-/* 鼠标悬停效果 */
-QPushButton:hover {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #1a4db7, stop:1 #2a70f4);
-}
-
-/* 按下效果 */
-QPushButton:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #1a4db7, stop:1 #0a3d94);
+    background-color: rgb(170, 170, 255);
+    border: 2px solid rgb(233, 233, 255);
+    border-radius:10px;
+    padding: 5px 15px;
+	text-align: right;
 }</string>
               </property>
               <property name="text">
@@ -195,13 +182,6 @@ QPushButton:pressed {
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
              <layout class="QGridLayout" name="gridLayout_3">
-              <item row="2" column="0">
-               <widget class="QLineEdit" name="lineEdit_4">
-                <property name="placeholderText">
-                 <string>章节目录页章节selector</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
                <widget class="QLineEdit" name="lineEdit">
                 <property name="placeholderText">
@@ -209,17 +189,24 @@ QPushButton:pressed {
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
-               <widget class="QLineEdit" name="lineEdit_2">
-                <property name="placeholderText">
-                 <string>章节内容selector</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="0">
                <widget class="QLineEdit" name="lineEdit_3">
                 <property name="placeholderText">
                  <string>目录页path：/kan/46118/</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLineEdit" name="lineEdit_4">
+                <property name="placeholderText">
+                 <string>章节目录页章节selector</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLineEdit" name="lineEdit_2">
+                <property name="placeholderText">
+                 <string>章节内容selector</string>
                 </property>
                </widget>
               </item>
@@ -284,6 +271,13 @@ QPushButton:pressed {
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PushButton</class>
+   <extends>QPushButton</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
