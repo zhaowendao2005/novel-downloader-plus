@@ -142,6 +142,13 @@
              </spacer>
             </item>
             <item>
+             <widget class="PushButton" name="pushButton222">
+              <property name="text">
+               <string>PushButton</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLineEdit" name="lineEdit_5">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -182,13 +189,6 @@
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
              <layout class="QGridLayout" name="gridLayout_3">
-              <item row="0" column="0">
-               <widget class="QLineEdit" name="lineEdit">
-                <property name="placeholderText">
-                 <string>域名www.biquge.com/</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="0">
                <widget class="QLineEdit" name="lineEdit_3">
                 <property name="placeholderText">
@@ -196,10 +196,10 @@
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QLineEdit" name="lineEdit_4">
+              <item row="0" column="0">
+               <widget class="QLineEdit" name="lineEdit">
                 <property name="placeholderText">
-                 <string>章节目录页章节selector</string>
+                 <string>域名www.biquge.com/</string>
                 </property>
                </widget>
               </item>
@@ -210,10 +210,23 @@
                 </property>
                </widget>
               </item>
+              <item row="2" column="0">
+               <widget class="QLineEdit" name="lineEdit_4">
+                <property name="placeholderText">
+                 <string>章节目录页章节selector</string>
+                </property>
+               </widget>
+              </item>
               <item row="4" column="0">
-               <widget class="QLabel" name="label_2">
+               <widget class="AcrylicLabel" name="label_2">
                 <property name="text">
-                 <string>占位符</string>
+                 <string/>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -276,6 +289,11 @@
    <class>PushButton</class>
    <extends>QPushButton</extends>
    <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>AcrylicLabel</class>
+   <extends>QLabel</extends>
+   <header>qfluentwidgets.components.widgets.acrylic_label</header>
   </customwidget>
  </customwidgets>
  <resources/>
