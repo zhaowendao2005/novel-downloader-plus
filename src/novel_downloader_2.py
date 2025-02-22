@@ -69,7 +69,7 @@ if __name__ == '__main__':
     downloader = NovelDownloader(
         baseurl="https://m.bqug8.com/",
         url_path='kan/131238/list.html',
-        output_file='output/novel_unfinished.txt',
+        output_file='novel_unfinished.txt',
         selector_content='#chaptercontent',  # 内容选择器
         selector_chapter='.listmain a', # 章节选择器
         max_workers=10
