@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1049</width>
-    <height>657</height>
+    <width>1259</width>
+    <height>820</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,99 +17,7 @@
    <double>0.800000000000000</double>
   </property>
   <property name="styleSheet">
-   <string notr="true">/* 主窗口 - 浅色主题基础 */
-background-color: qlineargradient(spread:reflect, x1:0.471591, y1:0, x2:0.499545, y2:1, stop:0 rgba(255,45,45, 0), stop:1 rgba(193, 151, 255, 4));
-QMainWindow, QWidget {
-    font-family: -apple-system, BlinkMacSystemFont; /* 苹果系统字体 */
-    color: #1D1D1F; /* 系统深灰色 */
-}
-
-/* 背景框架 - 毛玻璃效果 */
-QFrame#frame_MainBackground {
-    background-color: rgba(242, 242, 247, 0.9); /* iOS系统背景色 */
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.1);
-}
-
-/* 通用按钮样式 - iOS 风格 */
-PushButton, QPushButton {
-    background-color: #007AFF; /* 系统蓝色 */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    min-height: 28px;
-    font-weight: 500;
-}
-
-PushButton:hover, QPushButton:hover {
-    background-color: #0063CC; /* 悬停加深 */
-}
-
-PushButton:pressed, QPushButton:pressed {
-    background-color: #004299; /* 按压效果 */
-}
-
-/* 输入框 - 现代扁平风格 */
-LineEdit, QLineEdit, QPlainTextEdit {
-    background-color: rgba(255,255,255,0.9);
-    border: 1px solid #C6C6C8;
-    border-radius: 8px;
-    padding: 6px 12px;
-    selection-background-color: #007AFF;
-}
-
-LineEdit:focus, QLineEdit:focus, QPlainTextEdit:focus {
-    border-color: #007AFF;
-    box-shadow: 0 0 0 2px rgba(0,122,255,0.2); /* iOS焦点效果 */
-}
-
-/* 工具盒(QToolBox) - 侧边栏风格 */ 
-QToolBox::tab {
-    background: rgba(242,242,247,0.8);
-    border-radius: 8px;
-    margin: 4px;
-    padding: 12px;
-}
-
-QToolBox::tab:selected {
-    background: rgba(0,122,255,0.1);
-    color: #007AFF;
-}
-
-/* 堆叠窗口(QStackedWidget) - 卡片式布局 */
-QStackedWidget QFrame {
-    background: white;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.1);
-    margin: 8px;
-    padding: 16px;
-}
-
-/* 标签文本 - 强调层次 */
-QLabel {
-    font-size: 13pt;
-    color: #3A3A3C;
-    qproperty-alignment: AlignCenter;
-}
-
-/* 分隔间距 - iOS标准间距 */
-QSpacerItem {
-    width: 16px;  /* 水平间距 */
-    height: 16px; /* 垂直间距 */
-}
-
-/* 滚动条 - 简约风格 */
-QScrollBar:vertical {
-    width: 6px;
-    background: transparent;
-}
-
-QScrollBar::handle:vertical {
-    background: #C6C6C8;
-    border-radius: 3px;
-}
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -121,7 +29,8 @@ QScrollBar::handle:vertical {
       <item>
        <widget class="QFrame" name="frame_MainBackground">
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(209, 209, 209, 0);</string>
+         <string notr="true">background-color: rgba(255, 255, 255, 0);
+</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -131,7 +40,7 @@ QScrollBar::handle:vertical {
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_12">
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_12">
+          <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,10">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,1,0">
              <item>
@@ -149,6 +58,10 @@ QScrollBar::handle:vertical {
              </item>
              <item>
               <widget class="QLabel" name="label_title">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgba(59, 59, 59, 200);
+border-radius: 10px;</string>
+               </property>
                <property name="text">
                 <string>小说下载器</string>
                </property>
@@ -175,69 +88,115 @@ QScrollBar::handle:vertical {
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,0,4">
              <item>
-              <widget class="QFrame" name="frame_7">
+              <widget class="GlassFrame" name="frame_7">
+               <property name="styleSheet">
+                <string notr="true">border-radius: 18px;
+background-color: rgba(255, 255, 255, 0);
+        qproperty-gradientAngle: 45;
+        qproperty-borderColor: rgba(200, 220, 255, 150);
+        qproperty-shadowColor: rgba(100, 120, 150, 80);
+        qproperty-shadowBlur: 40;
+        qproperty-hoverAnimDuration: 500;
+        qproperty-glassOpacity: 0.25;
+
+</string>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
                </property>
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <layout class="QHBoxLayout" name="horizontalLayout">
+               <layout class="QVBoxLayout" name="verticalLayout">
                 <item>
-                 <widget class="QToolBox" name="toolBox_3">
-                  <property name="styleSheet">
-                   <string notr="true">background-color: qlineargradient(spread:reflect, x1:0.471591, y1:0, x2:0.499545, y2:1, stop:0 rgba(231,231,231, 200), stop:1 rgba(231,231,231, 100));
-border-radius: 10px;
-</string>
+                 <spacer name="horizontalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
                   </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QToolBox" name="toolBox">
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
-                  <widget class="QWidget" name="page_7">
+                  <widget class="QWidget" name="page">
                    <property name="geometry">
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>175</width>
-                     <height>513</height>
+                     <width>219</width>
+                     <height>578</height>
                     </rect>
                    </property>
                    <attribute name="label">
                     <string>Page 1</string>
                    </attribute>
-                   <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <layout class="QVBoxLayout" name="verticalLayout_2">
                     <item>
-                     <widget class="QPushButton" name="pushButton_3">
-                      <property name="text">
-                       <string>PushButton</string>
+                     <widget class="QWidget" name="widget_toolbox_page1" native="true">
+                      <property name="styleSheet">
+                       <string notr="true"/>
                       </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout"/>
                      </widget>
                     </item>
                    </layout>
                   </widget>
-                  <widget class="QWidget" name="page_8">
+                  <widget class="QWidget" name="page_2">
                    <property name="geometry">
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>100</width>
-                     <height>30</height>
+                     <width>219</width>
+                     <height>578</height>
                     </rect>
                    </property>
                    <attribute name="label">
                     <string>Page 2</string>
                    </attribute>
-                   <layout class="QVBoxLayout" name="verticalLayout_13">
+                   <layout class="QHBoxLayout" name="horizontalLayout_2">
                     <item>
-                     <widget class="QPushButton" name="pushButton_4">
-                      <property name="text">
-                       <string>PushButton</string>
+                     <widget class="GlassFrame" name="frame">
+                      <property name="styleSheet">
+                       <string notr="true">        qproperty-gradientAngle: 45;
+        qproperty-borderColor: rgba(200, 220, 255, 150);
+        qproperty-shadowColor: rgba(100, 120, 150, 80);
+        qproperty-shadowBlur: 40;
+        qproperty-hoverAnimDuration: 500;
+        qproperty-glassOpacity: 0.25;</string>
                       </property>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_3"/>
                      </widget>
                     </item>
                    </layout>
                   </widget>
                  </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_4">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </widget>
@@ -256,7 +215,15 @@ border-radius: 10px;
               </spacer>
              </item>
              <item>
-              <widget class="QFrame" name="frame_8">
+              <widget class="GlassFrame" name="frame_8">
+               <property name="styleSheet">
+                <string notr="true">        qproperty-gradientAngle: 45;
+        qproperty-borderColor: rgba(200, 220, 255, 150);
+        qproperty-shadowColor: rgba(100, 120, 150, 80);
+        qproperty-shadowBlur: 40;
+        qproperty-hoverAnimDuration: 500;
+        qproperty-glassOpacity: 0.25;</string>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
                </property>
@@ -268,6 +235,9 @@ border-radius: 10px;
                  <layout class="QVBoxLayout" name="verticalLayout_17">
                   <item>
                    <widget class="QStackedWidget" name="stackedWidget">
+                    <property name="styleSheet">
+                     <string notr="true">Qframe#frame9</string>
+                    </property>
                     <property name="currentIndex">
                      <number>0</number>
                     </property>
@@ -275,6 +245,9 @@ border-radius: 10px;
                      <layout class="QHBoxLayout" name="horizontalLayout_7">
                       <item>
                        <widget class="QFrame" name="frame_9">
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
                         </property>
@@ -287,37 +260,53 @@ border-radius: 10px;
                            <item>
                             <widget class="QPlainTextEdit" name="plainTextEdit_3">
                              <property name="styleSheet">
-                              <string notr="true">background-color: rgb(170, 170, 255);
-border-radius: 10px;</string>
+                              <string notr="true">background-color: rgba(100, 100, 100, 150);
+border-radius: 18px;</string>
+                             </property>
+                             <property name="readOnly">
+                              <bool>true</bool>
+                             </property>
+                             <property name="centerOnScroll">
+                              <bool>false</bool>
                              </property>
                             </widget>
                            </item>
                            <item>
                             <layout class="QVBoxLayout" name="verticalLayout_15" stretch="1">
                              <item>
-                              <layout class="QVBoxLayout" name="verticalLayout_18" stretch="1,1">
-                               <item>
-                                <widget class="LineEdit" name="lineEdit_9"/>
-                               </item>
+                              <layout class="QVBoxLayout" name="verticalLayout_18" stretch="0,0">
                                <item>
                                 <layout class="QGridLayout" name="gridLayout_3">
-                                 <item row="0" column="1">
+                                 <item row="1" column="1">
                                   <widget class="LineEdit" name="lineEdit_12"/>
                                  </item>
-                                 <item row="1" column="0">
+                                 <item row="2" column="1">
+                                  <widget class="LineEdit" name="lineEdit_11"/>
+                                 </item>
+                                 <item row="2" column="0">
                                   <widget class="PushButton" name="pushButton_downloader">
                                    <property name="text">
                                     <string>PushButton</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="1" column="1">
-                                  <widget class="LineEdit" name="lineEdit_11"/>
-                                 </item>
-                                 <item row="2" column="1">
+                                 <item row="3" column="1">
                                   <widget class="LineEdit" name="lineEdit_10"/>
                                  </item>
+                                 <item row="0" column="1">
+                                  <widget class="LineEdit" name="lineEdit_9"/>
+                                 </item>
                                 </layout>
+                               </item>
+                               <item>
+                                <widget class="QLabel" name="label">
+                                 <property name="styleSheet">
+                                  <string notr="true">border-radius: 30px;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string/>
+                                 </property>
+                                </widget>
                                </item>
                               </layout>
                              </item>
@@ -371,7 +360,15 @@ border-radius: 10px;</string>
    <extends>QLineEdit</extends>
    <header>qfluentwidgets</header>
   </customwidget>
+  <customwidget>
+   <class>GlassFrame</class>
+   <extends>QFrame</extends>
+   <header>GlassFrame</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../QT/resource/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
