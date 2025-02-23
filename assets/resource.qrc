@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="picture">
+    <file>tool_box_page1_background.png</file>
+    <file>label_2.png</file>
+    <file>image.PNG</file>
+  </qresource>
+</RCC>
