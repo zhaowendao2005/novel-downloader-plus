@@ -4,9 +4,9 @@ from qfluentwidgets import FluentIcon
 from qfluentwidgets.common import Icon
 from qfluentwidgets import setTheme, Theme
 from PyQt5.QtGui import QColor,QPixmap, QPainter
-from src.picture_manager import BackgroundSetter
-from src.windows2 import Ui_MainWindow
-from src import novel_downloader_2
+from picture_manager import BackgroundSetter
+from windows2 import Ui_MainWindow
+import novel_downloader_2
 from PyQt5.QtGui import QMouseEvent
 
 import threading
