@@ -19,6 +19,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         background_setter = BackgroundSetter(self.widget_toolbox_page1, "../QT/resource/tool_box_page1_background.png", 0.8)
         background_setter = BackgroundSetter(self.label, "../QT/resource/label_2.png", 0.3)
         background_setter = BackgroundSetter(self.frame_MainBackground, "../QT/resource/image.png", 0.9)
+        background_setter = BackgroundSetter(self.frame_7, "../QT/resource/frame_7.png", 0.4)
+        background_setter = BackgroundSetter(self.frame_9, "../QT/resource/frame_9.png", 0.4)
 
 
 

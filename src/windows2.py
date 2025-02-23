@@ -14,8 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1257, 813)
-        MainWindow.setWindowOpacity(0.8)
+        MainWindow.resize(808, 477)
+        MainWindow.setWindowOpacity(1.0)
         MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("Qcentralwidget=rgba(255, 255, 255, 0)")
@@ -40,6 +40,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.addItem(spacerItem)
         self.label_title = QtWidgets.QLabel(self.frame_MainBackground)
         self.label_title.setStyleSheet("background-color: rgba(59, 59, 59, 200);\n"
+"color: rgb(255, 255, 255);\n"
 "border-radius: 10px;")
         self.label_title.setAlignment(QtCore.Qt.AlignCenter)
         self.label_title.setObjectName("label_title")
@@ -52,7 +53,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.frame_7 = GlassFrame(self.frame_MainBackground)
         self.frame_7.setStyleSheet("border-radius: 18px;\n"
-"background-color: rgba(255, 255, 255, 0);\n"
+"background-color: rgb(110, 112, 0,0);\n"
 "        qproperty-gradientAngle: 45;\n"
 "        qproperty-borderColor: rgba(200, 220, 255, 150);\n"
 "        qproperty-shadowColor: rgba(100, 120, 150, 80);\n"
@@ -71,7 +72,7 @@ class Ui_MainWindow(object):
         self.toolBox = QtWidgets.QToolBox(self.frame_7)
         self.toolBox.setObjectName("toolBox")
         self.page = QtWidgets.QWidget()
-        self.page.setGeometry(QtCore.QRect(0, 0, 218, 571))
+        self.page.setGeometry(QtCore.QRect(0, 0, 128, 266))
         self.page.setObjectName("page")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.page)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -83,17 +84,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.widget_toolbox_page1)
         self.toolBox.addItem(self.page, "")
         self.page_2 = QtWidgets.QWidget()
-        self.page_2.setGeometry(QtCore.QRect(0, 0, 218, 571))
+        self.page_2.setGeometry(QtCore.QRect(0, 0, 128, 266))
         self.page_2.setObjectName("page_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.page_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.frame = GlassFrame(self.page_2)
-        self.frame.setStyleSheet("        qproperty-gradientAngle: 45;\n"
-"        qproperty-borderColor: rgba(200, 220, 255, 150);\n"
-"        qproperty-shadowColor: rgba(100, 120, 150, 80);\n"
-"        qproperty-shadowBlur: 40;\n"
-"        qproperty-hoverAnimDuration: 500;\n"
-"        qproperty-glassOpacity: 0.25;")
+        self.frame.setStyleSheet("")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -199,8 +195,9 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.toolBox.setCurrentIndex(1)
+        self.toolBox.setCurrentIndex(0)
         self.stackedWidget.setCurrentIndex(0)
+        self.toolBox.currentChanged['int'].connect(self.stackedWidget.setCurrentIndex) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

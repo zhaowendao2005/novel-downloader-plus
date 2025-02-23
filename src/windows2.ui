@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1259</width>
-    <height>820</height>
+    <width>808</width>
+    <height>477</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="windowOpacity">
-   <double>0.800000000000000</double>
+   <double>1.000000000000000</double>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -60,6 +60,7 @@
               <widget class="QLabel" name="label_title">
                <property name="styleSheet">
                 <string notr="true">background-color: rgba(59, 59, 59, 200);
+color: rgb(255, 255, 255);
 border-radius: 10px;</string>
                </property>
                <property name="text">
@@ -91,7 +92,7 @@ border-radius: 10px;</string>
               <widget class="GlassFrame" name="frame_7">
                <property name="styleSheet">
                 <string notr="true">border-radius: 18px;
-background-color: rgba(255, 255, 255, 0);
+background-color: rgb(110, 112, 0,0);
         qproperty-gradientAngle: 45;
         qproperty-borderColor: rgba(200, 220, 255, 150);
         qproperty-shadowColor: rgba(100, 120, 150, 80);
@@ -124,15 +125,15 @@ background-color: rgba(255, 255, 255, 0);
                 <item>
                  <widget class="QToolBox" name="toolBox">
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="page">
                    <property name="geometry">
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>219</width>
-                     <height>578</height>
+                     <width>128</width>
+                     <height>266</height>
                     </rect>
                    </property>
                    <attribute name="label">
@@ -154,8 +155,8 @@ background-color: rgba(255, 255, 255, 0);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>219</width>
-                     <height>578</height>
+                     <width>87</width>
+                     <height>36</height>
                     </rect>
                    </property>
                    <attribute name="label">
@@ -165,12 +166,7 @@ background-color: rgba(255, 255, 255, 0);
                     <item>
                      <widget class="GlassFrame" name="frame">
                       <property name="styleSheet">
-                       <string notr="true">        qproperty-gradientAngle: 45;
-        qproperty-borderColor: rgba(200, 220, 255, 150);
-        qproperty-shadowColor: rgba(100, 120, 150, 80);
-        qproperty-shadowBlur: 40;
-        qproperty-hoverAnimDuration: 500;
-        qproperty-glassOpacity: 0.25;</string>
+                       <string notr="true"/>
                       </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
@@ -278,23 +274,31 @@ border-radius: 18px;</string>
                                <item>
                                 <layout class="QGridLayout" name="gridLayout_3">
                                  <item row="1" column="1">
-                                  <widget class="LineEdit" name="lineEdit_12"/>
+                                  <widget class="LineEdit" name="lineEdit_urlpath">
+                                   <property name="placeholderText">
+                                    <string>填写章节目录页路径：</string>
+                                   </property>
+                                  </widget>
                                  </item>
                                  <item row="2" column="1">
-                                  <widget class="LineEdit" name="lineEdit_11"/>
+                                  <widget class="LineEdit" name="lineEdit_chapterListSelector"/>
                                  </item>
                                  <item row="2" column="0">
                                   <widget class="PushButton" name="pushButton_downloader">
                                    <property name="text">
-                                    <string>PushButton</string>
+                                    <string>下载</string>
                                    </property>
                                   </widget>
                                  </item>
                                  <item row="3" column="1">
-                                  <widget class="LineEdit" name="lineEdit_10"/>
+                                  <widget class="LineEdit" name="lineEdit_contentSelector"/>
                                  </item>
                                  <item row="0" column="1">
-                                  <widget class="LineEdit" name="lineEdit_9"/>
+                                  <widget class="LineEdit" name="line_edit_baseurl">
+                                   <property name="placeholderText">
+                                    <string>填写小说网站域名：www.biquge.com</string>
+                                   </property>
+                                  </widget>
                                  </item>
                                 </layout>
                                </item>
@@ -370,5 +374,22 @@ border-radius: 18px;</string>
  <resources>
   <include location="../QT/resource/resource.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>toolBox</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>stackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>114</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>770</x>
+     <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
