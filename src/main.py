@@ -15,6 +15,10 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     log_signal = QtCore.pyqtSignal(str)  # 新增日志信号
+    # 定义线程信号
+    finished = QtCore.pyqtSignal()
+    progress = QtCore.pyqtSignal(str)
+    result = QtCore.pyqtSignal(int)
 
     def __init__(self):
         super().__init__()
@@ -23,6 +27,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         download_thread = threading.Thread(target=self.download_novel)
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
+        #创建线程初始对象
+        self.download_thread = None  # 线程控制器
+        self.worker = None  # 工作对象
+
 
         #日志输出
 
@@ -58,6 +66,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
 
+
+
     def mousePressEvent(self, event: QMouseEvent):
         super().mousePressEvent(event)
         if event.button() == Qt.LeftButton:
@@ -88,47 +98,66 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # 判断鼠标是否位于窗口右下角 10 像素范围内
         return (pos.x() >= self.width() - 30 and pos.y() >= self.height() - 30)
 
-
     def download_novel(self):
-        def generate_output_file_name(output_dir, base_name="outputfile"):
-            index = 1
-            output_file = os.path.join(output_dir, f"{base_name}.txt")
-
-            while os.path.exists(output_file):
-                output_file = os.path.join(output_dir, f"{base_name}_{index}.txt")
-                index += 1
-
-            return output_file
-        baseurl = self.line_edit_baseurl.text()
-
-
-        url_path = self.lineEdit_urlpath.text()
-        selector_chapterList = self.lineEdit_chapterListSelector.text()
-        selector_content = self.lineEdit_contentSelector.text()
-        output_dir = "output"
-        output_file = generate_output_file_name(output_dir)
-        max_workers = self.lineEdit_worker.text()
-        self.update_console("Download started...")
-        try:
-            max_workers = int(self.lineEdit_worker.text())
-        except ValueError:
-            self.update_console("线程数必须是整数")
+        """重构后的下载方法"""
+        if self.download_thread and self.download_thread.isRunning():
+            self.update_console("下载正在进行中...")
             return
-        downloader = novel_downloader_2.NovelDownloader(
-            baseurl=baseurl,
-            url_path=url_path,
-            output_file=output_file,
-            selector_content=selector_content,
-            selector_chapter=selector_chapterList,
-            max_workers=max_workers
-        )
-        result = downloader.download_chapters()
+
+        # 组装参数
+        params = {
+            "baseurl": self.line_edit_baseurl.text(),
+            "url_path": self.lineEdit_urlpath.text(),
+            "selector_content": self.lineEdit_contentSelector.text(),
+            "selector_chapter": self.lineEdit_chapterListSelector.text(),
+            "output_file": self._generate_output_filename(),
+            "max_workers": self._get_worker_count()
+        }
+
+        # 创建线程对象
+        self.download_thread = QtCore.QThread()
+        self.worker = DownloadWorker(params)
+        self.worker.moveToThread(self.download_thread)
+
+        # 连接信号槽
+        self.download_thread.started.connect(self.worker.run)
+        self.worker.progress.connect(self.update_console)
+        self.worker.result.connect(self._handle_download_result)
+        self.worker.finished.connect(self.download_thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.download_thread.finished.connect(self.download_thread.deleteLater)
+
+        # 启动线程
+        self.download_thread.start()
+        self.update_console("后台下载线程已启动...")
+
+    def _get_worker_count(self):
+        """线程数校验"""
+        try:
+            return int(self.lineEdit_worker.text())
+        except ValueError:
+            self.update_console("线程数无效，使用默认值8")
+            return 8
+
+    def _generate_output_filename(self):
+        """文件名生成（原有逻辑迁移）"""
+        output_dir = "output"
+        base_name = "outputfile"
+        index = 1
+        output_file = os.path.join(output_dir, f"{base_name}.txt")
+        while os.path.exists(output_file):
+            output_file = os.path.join(output_dir, f"{base_name}_{index}.txt")
+            index += 1
+        return output_file
+
+    def _handle_download_result(self, result):
+        """结果处理"""
         if result == 0:
             self.update_console("下载完成")
         elif result == -1:
             self.update_console("下载失败")
         else:
-            self.update_console(f"下载失败章节数: {result}")
+            self.update_console(f"部分失败，失败章节数: {result}")
 
 
 class QtLogHandler(logging.Handler):
@@ -143,7 +172,26 @@ class QtLogHandler(logging.Handler):
         self.signal.emit(msg)  # 通过信号转发格式化后的日志
 
 
+class DownloadWorker(QtCore.QObject):
+    # 定义线程信号
+    finished = QtCore.pyqtSignal()
+    progress = QtCore.pyqtSignal(str)
+    result = QtCore.pyqtSignal(int)
 
+    def __init__(self, params):
+        super().__init__()
+        self.params = params
+
+    def run(self):
+        try:
+            downloader = novel_downloader_2.NovelDownloader(**self.params)
+            ret = downloader.download_chapters()
+            self.result.emit(ret)
+        except Exception as e:
+            self.progress.emit(f"线程异常: {str(e)}")
+            self.result.emit(-1)
+        finally:
+            self.finished.emit()
 
 
 

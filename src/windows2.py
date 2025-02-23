@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(693, 473)
+        MainWindow.resize(695, 480)
         MainWindow.setWindowOpacity(1.0)
         MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -113,7 +113,7 @@ class Ui_MainWindow(object):
         self.toolBox = QtWidgets.QToolBox(self.frame_7)
         self.toolBox.setObjectName("toolBox")
         self.page = QtWidgets.QWidget()
-        self.page.setGeometry(QtCore.QRect(0, 0, 106, 272))
+        self.page.setGeometry(QtCore.QRect(0, 0, 106, 279))
         self.page.setObjectName("page")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.page)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -125,7 +125,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.widget_toolbox_page1)
         self.toolBox.addItem(self.page, "")
         self.page_2 = QtWidgets.QWidget()
-        self.page_2.setGeometry(QtCore.QRect(0, 0, 106, 272))
+        self.page_2.setGeometry(QtCore.QRect(0, 0, 106, 279))
         self.page_2.setObjectName("page_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.page_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -213,6 +213,9 @@ class Ui_MainWindow(object):
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName("progressBar")
         self.gridLayout_3.addWidget(self.progressBar, 1, 0, 1, 1)
+        self.pushButton_openOutPut = PushButton(self.frame_9)
+        self.pushButton_openOutPut.setObjectName("pushButton_openOutPut")
+        self.gridLayout_3.addWidget(self.pushButton_openOutPut, 2, 0, 1, 1)
         self.gridLayout_3.setColumnMinimumWidth(0, 1)
         self.gridLayout_3.setColumnMinimumWidth(1, 1)
         self.gridLayout_3.setRowMinimumHeight(0, 1)
@@ -274,6 +277,7 @@ class Ui_MainWindow(object):
         self.pushButton_downloader.setText(_translate("MainWindow", "下载"))
         self.line_edit_baseurl.setPlaceholderText(_translate("MainWindow", "填写小说网站域名：https://m.bqug8.com/"))
         self.lineEdit_worker.setPlaceholderText(_translate("MainWindow", "填写线程数量"))
+        self.pushButton_openOutPut.setText(_translate("MainWindow", "打开保存目录"))
         self.pushButton_6.setText(_translate("MainWindow", "PushButton"))
 from GlassFrame import GlassFrame
 from RandomHueProgressRing import RandomHueProgressRing

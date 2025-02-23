@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>693</width>
-    <height>473</height>
+    <width>695</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -218,7 +218,7 @@ background-color: rgb(110, 112, 0,0);
                      <x>0</x>
                      <y>0</y>
                      <width>106</width>
-                     <height>272</height>
+                     <height>279</height>
                     </rect>
                    </property>
                    <attribute name="label">
@@ -240,8 +240,8 @@ background-color: rgb(110, 112, 0,0);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>106</width>
-                     <height>272</height>
+                     <width>87</width>
+                     <height>36</height>
                     </rect>
                    </property>
                    <attribute name="label">
@@ -342,6 +342,8 @@ background-color: rgb(110, 112, 0,0);
                             <widget class="QPlainTextEdit" name="plainTextEdit_console">
                              <property name="styleSheet">
                               <string notr="true">background-color: rgba(100, 100, 100, 150);
+color: rgb(170, 170, 255);
+font: 12pt &quot;等线&quot;;
 border-radius: 18px;</string>
                              </property>
                              <property name="readOnly">
@@ -411,6 +413,13 @@ border-radius: 18px;</string>
                                   <widget class="RandomHueProgressRing" name="progressBar">
                                    <property name="value">
                                     <number>24</number>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="2" column="0">
+                                  <widget class="PushButton" name="pushButton_openOutPut">
+                                   <property name="text">
+                                    <string>打开保存目录</string>
                                    </property>
                                   </widget>
                                  </item>
