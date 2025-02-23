@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>808</width>
-    <height>477</height>
+    <width>739</width>
+    <height>283</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -132,8 +132,8 @@ background-color: rgb(110, 112, 0,0);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>128</width>
-                     <height>266</height>
+                     <width>115</width>
+                     <height>97</height>
                     </rect>
                    </property>
                    <attribute name="label">
@@ -254,7 +254,7 @@ background-color: rgb(110, 112, 0,0);
                          <item>
                           <layout class="QHBoxLayout" name="horizontalLayout_15">
                            <item>
-                            <widget class="QPlainTextEdit" name="plainTextEdit_3">
+                            <widget class="QPlainTextEdit" name="plainTextEdit_console">
                              <property name="styleSheet">
                               <string notr="true">background-color: rgba(100, 100, 100, 150);
 border-radius: 18px;</string>
@@ -272,31 +272,60 @@ border-radius: 18px;</string>
                              <item>
                               <layout class="QVBoxLayout" name="verticalLayout_18" stretch="0,0">
                                <item>
-                                <layout class="QGridLayout" name="gridLayout_3">
-                                 <item row="1" column="1">
-                                  <widget class="LineEdit" name="lineEdit_urlpath">
+                                <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,1,1,1,0" columnstretch="0,1" rowminimumheight="1,1,1,1,0" columnminimumwidth="1,1">
+                                 <property name="sizeConstraint">
+                                  <enum>QLayout::SetDefaultConstraint</enum>
+                                 </property>
+                                 <item row="4" column="1">
+                                  <widget class="LineEdit" name="lineEdit_contentSelector">
                                    <property name="placeholderText">
-                                    <string>填写章节目录页路径：</string>
+                                    <string>#chaptercontent</string>
                                    </property>
                                   </widget>
                                  </item>
                                  <item row="2" column="1">
-                                  <widget class="LineEdit" name="lineEdit_chapterListSelector"/>
+                                  <widget class="LineEdit" name="lineEdit_urlpath">
+                                   <property name="placeholderText">
+                                    <string>填写章节目录页路径：kan/131238/list.html</string>
+                                   </property>
+                                  </widget>
                                  </item>
-                                 <item row="2" column="0">
+                                 <item row="3" column="1">
+                                  <widget class="LineEdit" name="lineEdit_chapterListSelector">
+                                   <property name="placeholderText">
+                                    <string>.listmain a</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="3" column="0">
                                   <widget class="PushButton" name="pushButton_downloader">
                                    <property name="text">
                                     <string>下载</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="3" column="1">
-                                  <widget class="LineEdit" name="lineEdit_contentSelector"/>
-                                 </item>
                                  <item row="0" column="1">
                                   <widget class="LineEdit" name="line_edit_baseurl">
                                    <property name="placeholderText">
-                                    <string>填写小说网站域名：www.biquge.com</string>
+                                    <string>填写小说网站域名：https://m.bqug8.com/</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="0" column="0">
+                                  <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0">
+                                   <item>
+                                    <widget class="QLineEdit" name="lineEdit_worker">
+                                     <property name="placeholderText">
+                                      <string>填写线程数量</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                  </layout>
+                                 </item>
+                                 <item row="1" column="0">
+                                  <widget class="RandomHueProgressRing" name="progressBar">
+                                   <property name="value">
+                                    <number>24</number>
                                    </property>
                                   </widget>
                                  </item>
@@ -370,6 +399,11 @@ border-radius: 18px;</string>
    <header>GlassFrame</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>RandomHueProgressRing</class>
+   <extends>QProgressBar</extends>
+   <header>randomhueprogressring</header>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="../QT/resource/resource.qrc"/>
@@ -382,12 +416,12 @@ border-radius: 18px;</string>
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>114</x>
-     <y>114</y>
+     <x>87</x>
+     <y>200</y>
     </hint>
     <hint type="destinationlabel">
-     <x>770</x>
-     <y>91</y>
+     <x>410</x>
+     <y>153</y>
     </hint>
    </hints>
   </connection>
