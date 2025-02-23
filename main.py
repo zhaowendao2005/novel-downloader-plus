@@ -4,14 +4,25 @@ from qfluentwidgets import FluentIcon
 from qfluentwidgets.common import Icon
 from qfluentwidgets import setTheme, Theme
 from PyQt5.QtGui import QColor,QPixmap, QPainter
-from picture_manager import BackgroundSetter
+from src.picture_manager import BackgroundSetter
 from src.windows2 import Ui_MainWindow
-import novel_downloader_2
+from src import novel_downloader_2
 from PyQt5.QtGui import QMouseEvent
-import os
+
 import threading
 import logging
+import os
+import sys
+
+# Set the working directory to the directory of the script
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+
+
+def open_output_file():
+    os.startfile("file_output")
+    #日志输出函数
+
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     log_signal = QtCore.pyqtSignal(str)  # 新增日志信号
@@ -51,16 +62,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
         #图片构件自定义
-        background_setter = BackgroundSetter(self.widget_toolbox_page1, "../QT/resource/tool_box_page1_background.png", 0.8)
-        background_setter = BackgroundSetter(self.label, "../QT/resource/label_2.png", 0.3)
-        background_setter = BackgroundSetter(self.frame_MainBackground, "../QT/resource/image.png", 0.9)
-        background_setter = BackgroundSetter(self.frame_7, "../QT/resource/frame_7.png", 0.4)
-        background_setter = BackgroundSetter(self.frame_9, "../QT/resource/frame_9.png", 0.4)
+        background_setter = BackgroundSetter(self.widget_toolbox_page1, "assets/tool_box_page1_background.png", 0.8)
+        background_setter = BackgroundSetter(self.label, "assets/label_2.png", 0.3)
+        background_setter = BackgroundSetter(self.frame_MainBackground, "assets/image.png", 0.9)
+        background_setter = BackgroundSetter(self.frame_7, "assets/frame_7.png", 0.4)
+        background_setter = BackgroundSetter(self.frame_9, "assets/frame_9.png", 0.4)
         self.pushButton_downloader.clicked.connect(self.download_novel)
         self.toolButton_exitWindow.clicked.connect(self.close)
         self.toolButton_removeWindow.clicked.connect(self.showMinimized)
         self.toolButton_maximiseWindow.clicked.connect(self.showMaximized)
-        #日志输出函数
+        self.pushButton_openOutPut.clicked.connect(open_output_file)
+
+
+
+    #资源管理器打开存储目录
+    def open_output_file(self):
+        os.statvfs("file_output")
     def update_console(self, message):
         self.plainTextEdit_console.appendPlainText(message)
 
@@ -141,7 +158,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def _generate_output_filename(self):
         """文件名生成（原有逻辑迁移）"""
-        output_dir = "output"
+        output_dir = "file_output"
         base_name = "outputfile"
         index = 1
         output_file = os.path.join(output_dir, f"{base_name}.txt")
