@@ -1,0 +1,4 @@
+2025-02-24 10:41:03,184 [ERROR] 请求错误: HTTPSConnectionPool(host='m.bqug8.com', port=443): Max retries exceeded with url: /kan/131238/list.html (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000027D18253580>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')))
+2025-02-24 10:41:03,193 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
+2025-02-24 10:42:22,182 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 10:42:22,183 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
