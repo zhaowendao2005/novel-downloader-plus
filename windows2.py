@@ -113,7 +113,7 @@ class Ui_MainWindow(object):
         self.toolBox = QtWidgets.QToolBox(self.frame_7)
         self.toolBox.setObjectName("toolBox")
         self.page = QtWidgets.QWidget()
-        self.page.setGeometry(QtCore.QRect(0, 0, 106, 279))
+        self.page.setGeometry(QtCore.QRect(0, 0, 106, 271))
         self.page.setObjectName("page")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.page)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -125,7 +125,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.widget_toolbox_page1)
         self.toolBox.addItem(self.page, "")
         self.page_2 = QtWidgets.QWidget()
-        self.page_2.setGeometry(QtCore.QRect(0, 0, 106, 279))
+        self.page_2.setGeometry(QtCore.QRect(0, 0, 106, 271))
         self.page_2.setObjectName("page_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.page_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -176,6 +176,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_15.setObjectName("horizontalLayout_15")
         self.plainTextEdit_console = QtWidgets.QPlainTextEdit(self.frame_9)
         self.plainTextEdit_console.setStyleSheet("background-color: rgba(100, 100, 100, 150);\n"
+"color: rgb(170, 170, 255);\n"
+"font: 12pt \"等线\";\n"
 "border-radius: 18px;")
         self.plainTextEdit_console.setReadOnly(True)
         self.plainTextEdit_console.setCenterOnScroll(False)
@@ -216,6 +218,9 @@ class Ui_MainWindow(object):
         self.pushButton_openOutPut = PushButton(self.frame_9)
         self.pushButton_openOutPut.setObjectName("pushButton_openOutPut")
         self.gridLayout_3.addWidget(self.pushButton_openOutPut, 2, 0, 1, 1)
+        self.pushButton_stop = PushButton(self.frame_9)
+        self.pushButton_stop.setObjectName("pushButton_stop")
+        self.gridLayout_3.addWidget(self.pushButton_stop, 4, 0, 1, 1)
         self.gridLayout_3.setColumnMinimumWidth(0, 1)
         self.gridLayout_3.setColumnMinimumWidth(1, 1)
         self.gridLayout_3.setRowMinimumHeight(0, 1)
@@ -278,8 +283,8 @@ class Ui_MainWindow(object):
         self.line_edit_baseurl.setPlaceholderText(_translate("MainWindow", "填写小说网站域名：https://m.bqug8.com/"))
         self.lineEdit_worker.setPlaceholderText(_translate("MainWindow", "填写线程数量"))
         self.pushButton_openOutPut.setText(_translate("MainWindow", "打开保存目录"))
+        self.pushButton_stop.setText(_translate("MainWindow", "强制结束下载"))
         self.pushButton_6.setText(_translate("MainWindow", "PushButton"))
 from GlassFrame import GlassFrame
 from RandomHueProgressRing import RandomHueProgressRing
 from qfluentwidgets import LineEdit, PushButton
-import resource_rc

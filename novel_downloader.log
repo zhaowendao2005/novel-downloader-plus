@@ -2,3 +2,35 @@
 2025-02-24 10:41:03,193 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
 2025-02-24 10:42:22,182 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
 2025-02-24 10:42:22,183 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
+2025-02-24 11:03:56,154 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 11:03:56,156 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
+2025-02-24 11:04:38,253 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 11:04:38,262 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
+2025-02-24 11:04:42,728 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 11:04:42,728 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
+2025-02-24 11:05:43,479 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 11:05:43,489 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
+2025-02-24 11:08:47,105 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 11:08:47,114 [ERROR] 未获取到任何章节链接！请检查选择器或网络连接
+2025-02-24 19:23:43,213 [ERROR] 请求错误: HTTPSConnectionPool(host='m.bqug8.com', port=443): Max retries exceeded with url: /kan/131238/list.html (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000277FE012A00>: Failed to resolve 'm.bqug8.com' ([Errno 11001] getaddrinfo failed)"))
+2025-02-24 19:23:43,218 [INFO] 成功保存 0 章到 file_output\outputfile_1.txt
+2025-02-24 19:38:50,545 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:50,548 [INFO] 成功保存 0 章到 file_output\outputfile_2.txt
+2025-02-24 19:38:51,979 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:51,980 [INFO] 成功保存 0 章到 file_output\outputfile_3.txt
+2025-02-24 19:38:53,850 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:53,851 [INFO] 成功保存 0 章到 file_output\outputfile_4.txt
+2025-02-24 19:38:54,824 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:54,826 [INFO] 成功保存 0 章到 file_output\outputfile_5.txt
+2025-02-24 19:38:55,052 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:55,052 [INFO] 成功保存 0 章到 file_output\outputfile_6.txt
+2025-02-24 19:38:55,245 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:55,246 [INFO] 成功保存 0 章到 file_output\outputfile_7.txt
+2025-02-24 19:38:55,436 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:55,436 [INFO] 成功保存 0 章到 file_output\outputfile_8.txt
+2025-02-24 19:38:55,611 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:55,613 [INFO] 成功保存 0 章到 file_output\outputfile_9.txt
+2025-02-24 19:38:55,770 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:55,772 [INFO] 成功保存 0 章到 file_output\outputfile_10.txt
+2025-02-24 19:38:55,936 [ERROR] 请求错误: Invalid URL '': No scheme supplied. Perhaps you meant https://?
+2025-02-24 19:38:55,936 [INFO] 成功保存 0 章到 file_output\outputfile_11.txt

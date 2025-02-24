@@ -72,8 +72,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.toolButton_removeWindow.clicked.connect(self.showMinimized)
         self.toolButton_maximiseWindow.clicked.connect(self.showMaximized)
         self.pushButton_openOutPut.clicked.connect(open_output_file)
+        self.pushButton_stop.clicked.connect(self.stop_download)
+            #强制终止任务方法
+    def stop_download(self):
+        if self.download_thread and self.download_thread.isRunning():
+            self.update_console("正在安全终止下载...")
+            self.download_timer.stop()
+        if self.download_thread and self.download_thread.isRunning():
+            self.update_console("正在安全终止下载...")
+            # 先请求正常退出
+            self.download_thread.requestInterruption()
+            self.worker.interrupt_requested = True  # 需要给worker添加中断标志
 
-
+            # 设置超时强制终止
+            if not self.download_thread.wait(3000):  # 等待3秒
+                self.update_console("强制终止线程...")
+                self.download_thread.terminate()
+                if not self.download_thread.wait(1000):
+                    self.update_console("线程终止失败")
+            self._cleanup_thread()
 
     #资源管理器打开存储目录
     def open_output_file(self):
@@ -115,11 +132,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # 判断鼠标是否位于窗口右下角 10 像素范围内
         return (pos.x() >= self.width() - 30 and pos.y() >= self.height() - 30)
 
+    def _cleanup_thread(self):
+        try:
+            if self.download_thread:
+                self.download_thread.quit()
+                self.download_thread.wait()
+                self.download_thread.deleteLater()
+            if self.worker:
+                self.worker.deleteLater()
+        except RuntimeError:
+            pass
+        finally:
+            self.download_thread = None
+            self.worker = None
+
     def download_novel(self):
         """重构后的下载方法"""
         if self.download_thread and self.download_thread.isRunning():
             self.update_console("下载正在进行中...")
             return
+
+        # 在原来的代码之后增加超时检测
+        self.download_timer = QtCore.QTimer()
+        self.download_timer.timeout.connect(self.check_thread_status)
+        self.download_timer.start(5000)  # 每5秒检测一次
+
+
+
+
 
         # 组装参数
         params = {
@@ -143,11 +183,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.worker.finished.connect(self.download_thread.quit)
         self.worker.finished.connect(self.worker.deleteLater)
         self.download_thread.finished.connect(self.download_thread.deleteLater)
+        self.worker.finished.connect(self._cleanup_thread)
 
         # 启动线程
         self.download_thread.start()
         self.update_console("后台下载线程已启动...")
-
+        #强制终止任务时检测对象是否存在
+    def check_thread_status(self):
+        if self.download_thread is None:  # 新增检查
+            self.download_timer.stop()
+            return
+        if not self.download_thread.isRunning():
+            self.update_console("线程已终止，正在清理...")
+            self._cleanup_thread()
+            self.download_timer.stop()
+        if not self.download_thread.isRunning():
+            self.update_console("线程已终止，正在清理...")
+            self._cleanup_thread()
+            self.download_timer.stop()
+        else:
+            self.download_timer.stop()
     def _get_worker_count(self):
         """线程数校验"""
         try:
@@ -198,6 +253,7 @@ class DownloadWorker(QtCore.QObject):
     def __init__(self, params):
         super().__init__()
         self.params = params
+        self.interrupt_requested = False  # 新增中断标志
 
     def run(self):
         try:
@@ -205,10 +261,18 @@ class DownloadWorker(QtCore.QObject):
             ret = downloader.download_chapters()
             self.result.emit(ret)
         except Exception as e:
+            logging.exception("Download failed")
             self.progress.emit(f"线程异常: {str(e)}")
             self.result.emit(-1)
         finally:
-            self.finished.emit()
+            try:
+                self.finished.emit()
+            except RuntimeError:  # 处理对象已删除的情况
+                pass
+
+    def check_interrupt(self):
+        """ 供downloader调用的中断检查 """
+        return self.interrupt_requested or self.thread().isInterruptionRequested()
 
 
 

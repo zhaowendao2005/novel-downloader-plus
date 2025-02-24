@@ -32,22 +32,49 @@ class NovelDownloader:
         self.max_retries = 1  # 最大重试次数
         self.retry_delay = 1  # 重试等待时间（秒）
         self.max_workers = max_workers
+        self.interrupt_check = None
+
+    def set_interrupt_check(self, callback):
+        """设置中断检查回调方法"""
+        self.interrupt_check = callback
+
+
+
 
     def download_chapters(self):
         try:
             requester = RequestChapterURL(self.baseurl, self.url_path, self.selector_chapter)
             chapters = requester.get_chapter_links_and_titles()
 
-            if not chapters:
-                logging.error("未获取到任何章节链接！请检查选择器或网络连接")
-                return
+            # 新增中断检查点
+            if self.interrupt_check and self.interrupt_check():
+                logging.warning("下载被用户中断")
+                return -2  # 用特定代码表示用户中断
 
-            async_downloader = AsyncChapterDownloader(max_workers=self.max_workers, max_retries=self.max_retries,
-                                                      retry_delay=self.retry_delay)
-            chapter_contents, failed_chapters = async_downloader.download_chapters(chapters, self.selector_content)
+            async_downloader = AsyncChapterDownloader(
+                max_workers=self.max_workers,
+                max_retries=self.max_retries,
+                retry_delay=self.retry_delay
+            )
+
+            # 传递中断检查给async_downloader
+            chapter_contents, failed_chapters = async_downloader.download_chapters(
+                chapters,
+                self.selector_content,
+                self.interrupt_check  # 传递中断检查回调
+            )
+
+            # 定期检查中断
+            for i, (title, content) in enumerate(chapter_contents.items()):
+                if i % 10 == 0 and self.interrupt_check and self.interrupt_check():
+                    logging.warning("保存过程中检测到中断请求")
+                    return -2
 
             self.save_to_file(chapter_contents)
             return len(failed_chapters)
+        except KeyboardInterrupt:
+            logging.warning("捕获到键盘中断信号")
+            return -2
         except Exception as e:
             logging.critical(f"致命错误: {str(e)}")
             return -1

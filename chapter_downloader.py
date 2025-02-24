@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import os
 from request_chatper_url import RequestChapterURL
 import random
+import logging
 
 class ChapterDownloader:
     agent_list = [
@@ -32,6 +33,22 @@ class ChapterDownloader:
         self.selector = selector
     def getrandomagent(self):
         return random.choice(self.agent_list)
+
+    def request_html(self):
+        try:
+            response = requests.get(self.chapter_url,
+                                    headers=self.headers,
+                                    timeout=(3, 10))  # 连接3秒，读取10秒超时
+            response.raise_for_status()
+            return response.text
+        except requests.exceptions.Timeout:
+            logging.warning(f"请求超时: {self.chapter_url}")
+            raise
+        except requests.exceptions.RequestException as e:
+            logging.warning(f"网络请求失败: {str(e)}")
+            raise
+
+
     def request_html(self):
         response = requests.get(self.chapter_url, headers=self.headers)
         if response.status_code == 200:

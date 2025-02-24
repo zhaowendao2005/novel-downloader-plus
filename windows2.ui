@@ -218,7 +218,7 @@ background-color: rgb(110, 112, 0,0);
                      <x>0</x>
                      <y>0</y>
                      <width>106</width>
-                     <height>279</height>
+                     <height>271</height>
                     </rect>
                    </property>
                    <attribute name="label">
@@ -240,8 +240,8 @@ background-color: rgb(110, 112, 0,0);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>87</width>
-                     <height>36</height>
+                     <width>106</width>
+                     <height>271</height>
                     </rect>
                    </property>
                    <attribute name="label">
@@ -423,6 +423,13 @@ border-radius: 18px;</string>
                                    </property>
                                   </widget>
                                  </item>
+                                 <item row="4" column="0">
+                                  <widget class="PushButton" name="pushButton_stop">
+                                   <property name="text">
+                                    <string>强制结束下载</string>
+                                   </property>
+                                  </widget>
+                                 </item>
                                 </layout>
                                </item>
                                <item>
@@ -499,9 +506,7 @@ border-radius: 18px;</string>
    <header>RandomHueProgressRing</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../QT/resource/resource.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>toolBox</sender>
