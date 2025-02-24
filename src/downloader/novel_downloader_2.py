@@ -6,16 +6,16 @@ import time
 
 from twisted.web.html import output
 
-from request_chatper_url import RequestChapterURL
-from chapter_downloader import ChapterDownloader
-from async_downloader import AsyncChapterDownloader
+from .request_chatper_url import RequestChapterURL
+
+from .async_downloader import AsyncChapterDownloader
 
 # 配置日志系统
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(message)s',
     handlers=[
-        logging.FileHandler('../novel_downloader.log'),
+        logging.FileHandler('../../../novel_downloader.log'),
         logging.StreamHandler()
     ]
 )

@@ -3,7 +3,7 @@
 import concurrent.futures  # 新增的导入
 import logging
 import time
-from chapter_downloader import ChapterDownloader
+from .chapter_downloader import ChapterDownloader
 
 
 

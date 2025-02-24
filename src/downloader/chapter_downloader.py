@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import os
-from request_chatper_url import RequestChapterURL
+from .request_chatper_url import RequestChapterURL
 import random
 import logging
 

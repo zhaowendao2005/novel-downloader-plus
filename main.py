@@ -1,22 +1,21 @@
+import sys
+from pathlib import Path
+import src
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import Qt
 from qfluentwidgets import FluentIcon
 from qfluentwidgets.common import Icon
 from qfluentwidgets import setTheme, Theme
-from PyQt5.QtGui import QColor,QPixmap, QPainter
-from picture_manager import BackgroundSetter
-from windows2 import Ui_MainWindow
-import novel_downloader_2
+from src.picture_manager import BackgroundSetter
+from src.qt.windows2 import Ui_MainWindow
 from PyQt5.QtGui import QMouseEvent
-
+from src.downloader import novel_downloader_2
 import threading
 import logging
 import os
-import sys
 
 # Set the working directory to the directory of the script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
 
 
 def open_output_file():
